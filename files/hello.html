@@ -1,0 +1,22 @@
+<script>
+  function loadPopularity() {
+    fetch("/popularity", { method: "get" })
+      .then(response => response.json())
+      .then(jsonData => {
+        var resultsDiv = document.getElementById("results");
+        resultsDiv.innerHTML = "";
+        jsonData.forEach(function(item) {
+          resultsDiv.innerHTML += `<div>${item.name} : ${
+            item.times_seen
+          }</div>`;
+        });
+      });
+  }
+</script>
+What is your name?
+<form method="post" action="/say-name">
+  <input type="text" name="name" /> <button type="submit">That's Me</button>
+</form>
+<hr />
+<button onClick="loadPopularity()">Get Popularity</button>
+<div id="results"></div>
